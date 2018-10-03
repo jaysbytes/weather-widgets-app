@@ -1,0 +1,9 @@
+.addWidgetContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+}
+.addWidgetButton {
+  margin-left: 10px;
+}
