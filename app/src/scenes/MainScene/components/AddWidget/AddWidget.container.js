@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import AddWidgetView from './AddWidget.view.jsx'
 
 import { getCitiesList } from '../../../../services/cities.service/actions'
-import { addCityWidget } from '../../../../services/weather.service/actions'
+import { addCityWidget } from '../../../../services/weatherWidgets.service/actions'
 
 const mapStateToProps = (state, ownProps) => ({
   citiesList : state.citiesState.citiesList

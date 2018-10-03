@@ -4,7 +4,7 @@ import debounce from 'debounce'
 
 import userReducer from './services/user.service/reducer'
 import citiesReducer from './services/cities.service/reducer'
-import weatherReducer from './services/weather.service/reducer'
+import weatherWidgetsReducer from './services/weatherWidgets.service/reducer'
 
 const storeKeyName = 'reduxStore'
 
@@ -29,7 +29,7 @@ const saveState = (state) => {
 const combinedReducers = combineReducers({
   userState : userReducer,
   citiesState : citiesReducer,
-  weatherState : weatherReducer,
+  weatherWidgetsState : weatherWidgetsReducer,
 })
 
 const store = createStore(combinedReducers, loadState(), applyMiddleware(thunk))
