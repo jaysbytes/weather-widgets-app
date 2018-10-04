@@ -8,7 +8,7 @@ const addCity = (state, city) => {
   if (!alreadyExists) {
     const newWidget = {
       city,
-      weather: null
+      weather: {}
     }
     return {
       ...state,
@@ -25,14 +25,27 @@ const removeCity = (state, cityID) => {
     weatherWidgetsList : state.weatherWidgetsList.filter(({city}) => (city.id !== cityID))
   }
 }
-const setCityWeather = (state) => {
-  return state
+const setCityWeather = (state, cityID, weather) => {
+  return {
+    ...state,
+    weatherWidgetsList : state.weatherWidgetsList.map((widgetData) => {
+      if (widgetData.city.id === cityID) {
+        return {
+          ...widgetData,
+          weather
+        }
+      }
+      else {
+        return widgetData
+      }
+    })
+  }
 }
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_CITY: return addCity(state, action.city)
     case actionTypes.REMOVE_CITY: return removeCity(state, action.cityID)
-    case actionTypes.SET_CITY_WEATHER : return setCityWeather(state, action.cityID, action.weather)
+    case actionTypes.SET_CITY_WEATHER : return setCityWeather(state, action.cityID, action.weatherData)
     default: return state
   }
 }

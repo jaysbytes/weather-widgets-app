@@ -1,0 +1,29 @@
+.widgetCard {
+  background-color: #CFE4FE;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 8px;
+  min-height: 150px;
+  width: 180px;
+}
+.widgetCard > * {
+  padding: 8px;
+}
+.widgetHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.widgetHeader .button:first-of-type {
+  margin-right: 10px;
+}
+.widgetCloudsIcon {
+  width: 30px;
+  height: 30px;
+}
+.widgetFooter {
+  background-color: white;
+  margin-top: auto;
+}

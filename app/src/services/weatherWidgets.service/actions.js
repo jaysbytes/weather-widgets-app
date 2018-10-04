@@ -1,14 +1,16 @@
 import * as actionTypes from './action-types'
 
-import { default as fetchCityWeather } from '../api.service/weather'
+import { getCityWeather as fetchCityWeather } from '../api.service/weather'
 
 const _addCityWidget = (city) => ({
   type : actionTypes.ADD_CITY,
   city
 })
 
-const _setCityWidgetWeather = () => ({
-  type : actionTypes.SET_CITY_WEATHER
+const _setCityWidgetWeather = (cityID, weatherData) => ({
+  type : actionTypes.SET_CITY_WEATHER,
+  cityID,
+  weatherData
 })
 
 export const removeCityWidget = (cityID) => ({
@@ -26,5 +28,11 @@ export const addCityWidget = (cityID) => (dispatch, getState) => {
   }
 }
 export const getCityWeather = (cityID) => async (dispatch, getState) => {
-
+  try {
+    const { data : weatherData } = await fetchCityWeather(cityID)
+    dispatch(_setCityWidgetWeather(cityID, weatherData))
+  }
+  catch(e) {
+    console.error('An error occured', e)
+  }
 }

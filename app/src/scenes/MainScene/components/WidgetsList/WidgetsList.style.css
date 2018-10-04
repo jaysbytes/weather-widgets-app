@@ -1,0 +1,4 @@
+.widgetsList {
+  display: flex;  
+  flex-wrap: wrap;
+}
