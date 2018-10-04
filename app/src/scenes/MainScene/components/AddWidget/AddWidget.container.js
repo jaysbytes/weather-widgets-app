@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { message } from 'antd'
 
 import AddWidgetView from './AddWidget.view.jsx'
 
@@ -15,7 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(getCitiesList())
   },
   addCityWidget : (cityID) => {
-    dispatch(addCityWidget(cityID))
+    return dispatch(addCityWidget(cityID))
   }
 })
 
@@ -35,7 +36,15 @@ class AddWidgetContainer extends Component {
     })
   }
   addCityWidget() {
-    this.props.addCityWidget(this.state.cityID)
+    if (this.state.cityID !== undefined) {
+      const widgetAdded = this.props.addCityWidget(this.state.cityID)
+      if (!widgetAdded) {
+        message.warn('Weather widget for this city has been already added.')
+      }
+    }
+    else {
+      message.warn('Please select a city from list.')
+    }
   }
   render() {
     const autoCompleteDataSource = this.props.citiesList.map((city) => ({

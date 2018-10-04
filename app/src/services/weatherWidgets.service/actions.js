@@ -21,11 +21,13 @@ export const removeCityWidget = (cityID) => ({
 
 export const addCityWidget = (cityID) => (dispatch, getState) => {
   const citiesList = getState().citiesState.citiesList
+  const widgetsCount = getState().weatherWidgetsState.weatherWidgetsList.length
   cityID = parseInt(cityID)
   const city = citiesList.find((city) => (city.id === cityID))
   if (city !== undefined) {
     dispatch(_addCityWidget(city))
   }
+  return widgetsCount < getState().weatherWidgetsState.weatherWidgetsList.length
 }
 export const getCityWeather = (cityID) => async (dispatch, getState) => {
   try {
