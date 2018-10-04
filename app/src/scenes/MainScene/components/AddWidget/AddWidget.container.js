@@ -29,9 +29,9 @@ class AddWidgetContainer extends Component {
   componentDidMount() {
     this.props.getCitiesList()
   }
-  setSelectedCityID(cityID) {
+  setSelectedCityID(selectedCity) {
     this.setState({
-      cityID
+      cityID : selectedCity ? selectedCity.value : undefined
     })
   }
   addCityWidget() {
@@ -39,7 +39,7 @@ class AddWidgetContainer extends Component {
   }
   render() {
     const autoCompleteDataSource = this.props.citiesList.map((city) => ({
-      text : city.name,
+      label : city.name,
       value : city.id
     }))
     return (<AddWidgetView 

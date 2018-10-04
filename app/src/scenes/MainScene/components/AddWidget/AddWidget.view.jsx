@@ -1,20 +1,20 @@
 import React from 'react'
-import { AutoComplete, Button, Icon } from 'antd'
+import { Button, Icon } from 'antd'
 
+import Select from 'react-virtualized-select'
+import "react-virtualized-select/styles.css";
+import 'react-select/dist/react-select.css'
 import './AddWidget.style.css'
 
-const AddWidgetView = ({ citiesList, setSelectedCityID, addCityWidget }) => {
+const AddWidgetView = ({ citiesList, setSelectedCityID, cityID, addCityWidget }) => {
   return (
     <div className="addWidgetContainer">
-      <AutoComplete 
-       
-        dataSource={citiesList}
-        filterOption={(inputValue, option) => {
-          return (option.props.children.toLowerCase().includes(inputValue.toLowerCase()))}
-        }
-        onSelect={setSelectedCityID}
-        style={{width: '70%'}}
-      />
+      <Select
+        options={citiesList}
+        value={cityID}
+        onChange={setSelectedCityID}
+      >
+      </Select>
       <Button className="addWidgetButton" onClick={addCityWidget}>
         <Icon type="plus-circle" />
       </Button>

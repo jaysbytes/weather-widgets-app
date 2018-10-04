@@ -4,6 +4,9 @@
   justify-content: center;
   padding: 10px;
 }
+.addWidgetContainer .Select {
+  width: 70%;
+}
 .addWidgetButton {
   margin-left: 10px;
 }
