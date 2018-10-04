@@ -6,7 +6,7 @@ import WidgetsList from './components/WidgetsList'
 
 const MainSceneView = () => {
   return (
-    <Layout>
+    <Layout style={{minHeight : '100vh'}}>
       <Layout.Content style={{padding: 16}}>
         <Row >
           <AddWidget/>    
