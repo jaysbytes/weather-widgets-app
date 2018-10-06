@@ -25,23 +25,45 @@ const CloudsIcon = ({cloudPercentage}) => {
   )
 }
 
-const WeatherWidgetView = ({city, weather, removeWidget, getWeatherDataDebounced}) => (
-  <div className="widgetCard">
-    <div className="widgetHeader">
-      <CloudsIcon cloudPercentage={weather.cloudPercentage}/>
-      <div>
-        <Button className="button" onClick={getWeatherDataDebounced}><Icon type="sync" theme="outlined" /></Button>
-        <Button className="button" onClick={removeWidget}><Icon type="delete" theme="outlined" /></Button>
+const WeatherWidgetView = ({
+  city, 
+  weather, 
+  removeWidget, 
+  getWeatherDataDebounced,
+  widgetContainerRef,
+  notifyRefreshed,
+  willAppear,
+  willDelete
+}) => {
+  let containerClassName = 'widgetCard'
+  if (notifyRefreshed) {
+    containerClassName += ' refreshedAnim'
+  }
+  if (willDelete) {
+    containerClassName += ' deleteAnim'
+  }
+  if (willAppear) {
+    containerClassName += ' appearAnim'
+  }
+  return (
+    <div ref={widgetContainerRef} className={containerClassName}>
+      {willDelete}
+      <div className="widgetHeader">
+        <CloudsIcon cloudPercentage={weather.cloudPercentage}/>
+        <div>
+          <Button className="button" onClick={getWeatherDataDebounced}><Icon type="sync" theme="outlined" /></Button>
+          <Button className="button" onClick={removeWidget}><Icon type="delete" theme="outlined" /></Button>
+        </div>
+      </div>
+      <div className="widgetContent">
+        <p>Temp {weather.temperature}</p>
+      </div>
+      <div className="widgetFooter">
+        {city.name}
       </div>
     </div>
-    <div className="widgetContent">
-      <p>Temp {weather.temperature}</p>
-    </div>
-    <div className="widgetFooter">
-      {city.name}
-    </div>
-  </div>
-)
+  )
+}
 
 export default WeatherWidgetView
 
