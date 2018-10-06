@@ -1,8 +1,6 @@
 import React from 'react'
-import { Col } from 'antd'
 
 import './WidgetsList.style.css'
-
 import WeatherWidget from '../WeatherWidget'
 
 const WidgetListView = ({ widgetsList }) => {

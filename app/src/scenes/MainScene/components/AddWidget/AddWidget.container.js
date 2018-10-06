@@ -7,11 +7,11 @@ import AddWidgetView from './AddWidget.view.jsx'
 import { getCitiesList } from '../../../../services/cities.service/actions'
 import { addCityWidget } from '../../../../services/weatherWidgets.service/actions'
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   citiesList : state.citiesState.citiesList
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
   getCitiesList : () => {
     dispatch(getCitiesList())
   },
@@ -26,6 +26,8 @@ class AddWidgetContainer extends Component {
     this.state = {
       cityID : undefined
     }
+    this.setSelectedCityID = this.setSelectedCityID.bind(this)
+    this.addCityWidget = this.addCityWidget.bind(this)
   }
   componentDidMount() {
     this.props.getCitiesList()
@@ -46,16 +48,18 @@ class AddWidgetContainer extends Component {
       message.warn('Please select a city from list.')
     }
   }
-  render() {
-    const autoCompleteDataSource = this.props.citiesList.map((city) => ({
+  transformCitiesListToLabelValuePairs(citiesList) {
+    return citiesList.map((city) => ({
       label : city.name,
       value : city.id
     }))
+  }
+  render() {
     return (<AddWidgetView 
-      citiesList={autoCompleteDataSource} 
-      setSelectedCityID={this.setSelectedCityID.bind(this)}
+      citiesList={this.transformCitiesListToLabelValuePairs(this.props.citiesList)} 
       cityID={this.state.cityID}
-      addCityWidget={this.addCityWidget.bind(this)}
+      setSelectedCityID={this.setSelectedCityID}
+      addCityWidget={this.addCityWidget}
     />)
   }
 }

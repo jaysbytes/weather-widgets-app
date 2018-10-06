@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon, Button } from 'antd'
+import { Icon, Button } from 'antd'
 
 import './WeatherWidget.style.css'
 import Sun from './assets/sun.svg'
@@ -7,15 +7,21 @@ import Clouds from './assets/cloud.svg'
 import SemiClouds from './assets/cloud_sun.svg'
 
 const CloudsIcon = ({cloudPercentage}) => {
-  let iconLink = Sun
-  if (cloudPercentage > 30) {
-    iconLink = SemiClouds
+  let iconAlt, iconLink
+  if (cloudPercentage < 33) {
+    iconLink = Sun
+    iconAlt = 'sun'
   }
-  if (cloudPercentage > 70) {
+  else if (cloudPercentage < 66) {
+    iconLink = SemiClouds
+    iconAlt = 'semi-clouds'
+  }
+  else {
     iconLink = Clouds
+    iconAlt = 'clouds'
   }
   return (
-    <img className="widgetCloudsIcon" src={iconLink}/>
+    <img className="widgetCloudsIcon" src={iconLink} alt={iconAlt}/>
   )
 }
 
