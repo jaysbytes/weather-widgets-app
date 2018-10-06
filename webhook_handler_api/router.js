@@ -35,6 +35,7 @@ const router = (ownHost, ioEmmiter) => {
 
   mainRouter.delete('/subscribtion/:cityID', async (req, res, next) => {
     const cityID = parseInt(req.params.cityID)
+    const { token } = req
     const result = await hookServiceAdapter.unsubscribe(token, cityID)
     if (result) {
       DB.removeUserSubscription(token, cityID)
@@ -55,7 +56,6 @@ const router = (ownHost, ioEmmiter) => {
   })
   mainRouter.post('/notification/:cityID', (req, res, next) => {
     const cityID = parseInt(req.params.cityID)
-    const { token } = req
     const citySubscribers = DB.getCitySubscribers(cityID)
 
     citySubscribers.forEach((token) => {
