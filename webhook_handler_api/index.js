@@ -1,5 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import expressBearerToken from 'express-bearer-token'
 import _io from 'socket.io'
 import http from 'http'
@@ -10,6 +11,7 @@ import socketConnectionHandler from './socketConnectionHandler'
 const port = process.env.PORT || 3001
 const app = express()
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ extended: true }))
 app.use(expressBearerToken())

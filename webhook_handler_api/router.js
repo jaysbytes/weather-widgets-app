@@ -11,7 +11,7 @@ const router = (ownHost, ioEmmiter) => {
   const mainRouter = express.Router()
 
   mainRouter.post('/subscribtion/:cityID', async (req, res, next) => {
-    const { cityID } = req.params
+    const cityID = parseInt(req.params.cityID)
     const { token } = req
     const notificationUrl = `${ownHost}/notification/${cityID}`
     if (!DB.hasActiveHook(cityID)) {
@@ -34,9 +34,7 @@ const router = (ownHost, ioEmmiter) => {
   })
 
   mainRouter.delete('/subscribtion/:cityID', async (req, res, next) => {
-    const { cityID } = req.params
-    const { token } = req
-
+    const cityID = parseInt(req.params.cityID)
     const result = await hookServiceAdapter.unsubscribe(token, cityID)
     if (result) {
       DB.removeUserSubscription(token, cityID)
@@ -56,12 +54,12 @@ const router = (ownHost, ioEmmiter) => {
     }
   })
   mainRouter.post('/notification/:cityID', (req, res, next) => {
-    const { cityID } = req.params
+    const cityID = parseInt(req.params.cityID)
     const { token } = req
     const citySubscribers = DB.getCitySubscribers(cityID)
-    
+
     citySubscribers.forEach((token) => {
-      ioEmmiter.to(token).emit(ioEventTypes.data_update, { cityID, weather : req.body })
+      ioEmmiter.to(token).emit(ioEventTypes.data_update, { cityID : cityID, weather : req.body })
     })
     res.end()
   })
