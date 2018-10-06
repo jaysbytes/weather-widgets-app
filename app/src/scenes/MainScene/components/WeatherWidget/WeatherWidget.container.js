@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import debounce from 'debounce'
 
 import WeatherWidgetView from './WeatherWidget.view'
 
@@ -15,11 +16,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 class WeatherWidgetContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.getWeatherDataDebounced = debounce(this.props.getWeatherData, 1000)
+  }
   componentDidMount() {
     this.props.getWeatherData()
   }
   render() {
-    return <WeatherWidgetView {...this.props}/>
+    return <WeatherWidgetView 
+      {...this.props}
+      getWeatherDataDebounced={this.getWeatherDataDebounced}
+    />
   }
 }
 

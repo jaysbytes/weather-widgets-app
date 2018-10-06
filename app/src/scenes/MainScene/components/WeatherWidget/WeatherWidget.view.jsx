@@ -25,12 +25,12 @@ const CloudsIcon = ({cloudPercentage}) => {
   )
 }
 
-const WeatherWidgetView = ({city, weather, removeWidget, getWeatherData}) => (
+const WeatherWidgetView = ({city, weather, removeWidget, getWeatherDataDebounced}) => (
   <div className="widgetCard">
     <div className="widgetHeader">
       <CloudsIcon cloudPercentage={weather.cloudPercentage}/>
       <div>
-        <Button className="button" onClick={getWeatherData}><Icon type="sync" theme="outlined" /></Button>
+        <Button className="button" onClick={getWeatherDataDebounced}><Icon type="sync" theme="outlined" /></Button>
         <Button className="button" onClick={removeWidget}><Icon type="delete" theme="outlined" /></Button>
       </div>
     </div>
