@@ -1,17 +1,20 @@
 ## How to run
 * Install 
-	* `cd ./app && npm install && cd ../`
-	* `cd ./webhook_handler_api && npm install && cd ../`
+	* `cd ./client && npm install && cd ../`
+	* `cd ./notifications_server && npm install && cd ../`
 * Run
 	* Run delivered API -> `cd ./API && node index.js`
-	* Run created webhooks handler -> `cd ./webhook_handler_api && npm run start`
-	* Finnaly run the app -> `cd ./app && npm run start`
+	* Run created webhooks handler -> `cd ./notifications_server && npm run start`
+	* Finnaly run the app -> `cd ./client && npm run start`
 
 ## What has been done
+
 * Weather app with weather updates feature
 * Minimalistic Node.js backend to handle updates
-* debouncing network fired by widget refresh button 
+* debouncing network calls fired by widget refresh button 
 * WeatherWidgets reducer unit testing
+* Widget appear, refresh and delete animations for better UX
+
 ## Note about folders structure
 
 Proposed folders structure is a kind of overkill in such a small components scope, but I wanted to make the app extensible. The structure is based on an [article](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1). I’ve used this structure in my last project and it was convenient.
