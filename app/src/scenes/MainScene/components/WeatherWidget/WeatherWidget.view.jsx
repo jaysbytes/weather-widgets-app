@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon, Button } from 'antd'
+import PropTypes from 'prop-types'
 
 import './WeatherWidget.style.css'
 import Sun from './assets/sun.svg'
@@ -8,6 +9,9 @@ import SemiClouds from './assets/cloud_sun.svg'
 
 const CloudsIcon = ({cloudPercentage}) => {
   let iconAlt, iconLink
+  if (cloudPercentage === undefined) {
+    return null
+  }
   if (cloudPercentage < 33) {
     iconLink = Sun
     iconAlt = 'sun'
@@ -23,6 +27,10 @@ const CloudsIcon = ({cloudPercentage}) => {
   return (
     <img className="widgetCloudsIcon" src={iconLink} alt={iconAlt}/>
   )
+}
+
+CloudsIcon.propTypes = {
+  cloudPercentage : PropTypes.number
 }
 
 const WeatherWidgetView = ({
@@ -63,6 +71,26 @@ const WeatherWidgetView = ({
       </div>
     </div>
   )
+}
+
+WeatherWidgetView.propTypes = {
+  city : PropTypes.shape({
+    name : PropTypes.string.isRequired,
+  }).isRequired, 
+  weather : PropTypes.oneOfType([
+    PropTypes.shape({
+      cloudPercentage : PropTypes.number.isRequired,
+      temperature : PropTypes.number.isRequired,
+      rainAmount : PropTypes.number.isRequired,
+    }),
+    PropTypes.object.isRequired
+  ]), 
+  removeWidget : PropTypes.func.isRequired, 
+  getWeatherDataDebounced : PropTypes.func.isRequired,
+  widgetContainerRef : PropTypes.object.isRequired,
+  notifyRefreshed : PropTypes.bool.isRequired,
+  willAppear : PropTypes.bool.isRequired,
+  willDelete : PropTypes.bool.isRequired
 }
 
 export default WeatherWidgetView

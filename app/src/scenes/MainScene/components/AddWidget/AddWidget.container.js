@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { message } from 'antd'
+import PropTypes from 'prop-types'
 
 import AddWidgetView from './AddWidget.view.jsx'
 
@@ -21,6 +22,14 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class AddWidgetContainer extends Component {
+  static propTypes = {
+    citiesList : PropTypes.arrayOf(PropTypes.shape({
+      id : PropTypes.number.isRequired,
+      name : PropTypes.string.isRequired
+    })).isRequired,
+    getCitiesList : PropTypes.func.isRequired,
+    addCityWidget : PropTypes.func.isRequired
+  }
   constructor(props) {
     super(props)
     this.state = {

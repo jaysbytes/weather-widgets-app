@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import debounce from 'debounce'
+import PropTypes from 'prop-types'
 
 import WeatherWidgetView from './WeatherWidget.view'
 
@@ -16,6 +17,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 class WeatherWidgetContainer extends Component {
+  static propTypes = {
+    city : PropTypes.shape({
+      name : PropTypes.string.isRequired,
+      id : PropTypes.number.isRequired
+    }).isRequired,
+    weather : PropTypes.oneOfType([
+      PropTypes.shape({
+        cloudPercentage : PropTypes.number.isRequired,
+        temperature : PropTypes.number.isRequired,
+        rainAmount : PropTypes.number.isRequired,
+      }),
+      PropTypes.object.isRequired
+    ])
+  }
   constructor(props) {
     super(props)
     this.state = {
